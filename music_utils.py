@@ -86,7 +86,7 @@ def sequence_to_matrix(sequence, values_indices):
     return x
 
 def one_hot(x):
-    x = K.argmax(x)
-    x = tf.one_hot(x, 78) 
-    x = RepeatVector(1)(x)
+    x = tf.argmax(x, axis=-1)  # Get the index of the maximum value (shape: batch_size)
+    x = tf.one_hot(x, 90)  # One-hot encoding (shape: batch_size, 90)
+    x = RepeatVector(1)(x)  # Repeat vector for time step dimension (shape: batch_size, 1, 90)
     return x
